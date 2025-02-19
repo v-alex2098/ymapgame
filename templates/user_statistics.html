@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игра! Угадай регион России!</title>
+<link rel="stylesheet" href="/static/proekt.css" rel="stylesheet" type="text/css" />
+<script type = "text/javascript" src="/static/proekt.js" defer></script>
+<script type = "text/javascript"src="/static/h_o_f.js"></script>
+</head>
+<body>
+<header class="header" id="header">
+        <h1 class="logo">Мнимая карта</h1>
+        <img src="/static/images/map_h.png" class="img1">
+        <div class="header_container">
+		<h1 class="logo">Игра! Угадай регион России!</h1>
+		<a href="/">На главную страницу</a>	<img src="/static/images/home-24.png" class="img2">
+		<a href="/game">Играть снова</a>
+	    <a href="javascript:void(0)" onclick="showHallOfFame()">Лучшие игроки</a>
+	   </div>
+	   <span></span>
+</header>
+<section class="mapsect">
+   
+    <h3>Статистика пользователя {{ current_user.username }}</h3>
+    <table border="1">
+        <tr>
+            <th>Время начала</th>
+            <th>Время завершения</th>
+			<th>Времени затрачено</th>
+			<th>Регионов всего</th>
+			<th>Угадано с первой попытки</th>
+			<th>Угадано со второй попытки</th>
+			<th>Не угадано совсем</th>
+			<th>Итоговый счёт</th>
+        </tr>
+        {% for session in stats %}
+        <tr>
+            <td>{{ session.start_time_ftd }}</td>
+            <td>{{ session.end_time_ftd }}</td>
+			<td>{{ session.delta_time_ftd }}</td>
+			<td>{{ session.total_regions }}</td>
+			<td>{{ session.first_try_regions }}</td>
+			<td>{{ session.second_try_regions }}</td>
+			<td>{{ session.failed_regions }}</td>
+			<td>{{ session.score }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+	
+	</section>
+</body>
+</html>

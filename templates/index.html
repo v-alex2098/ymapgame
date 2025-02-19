@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Игра! Угадай регион России!</title>
+    <link rel="stylesheet" href="/static/proekt.css" rel="stylesheet" type="text/css" />
+    <script type = "text/javascript" src="/static/proekt.js" defer></script>
+</head>
+
+
+
+<body>
+   <header class="header" id="header">
+        <h1 class="logo">Мнимая карта</h1>
+        <img src="/static/images/map_h.png" class="img1">
+        <div class="header_container">
+		{% if current_user.is_authenticated %}
+			<p>Добро пожаловать, {{ current_user.username }}!</p>
+			<a href="{{ url_for('game') }}">Играть в игру</a> 
+			<img src="/static/images/map-3-24.png" class="img2">
+			<a href="{{ url_for('statistics_page') }}">Игровая статистика</a>
+			<img src="/static/images/user-24.png" class="img2">
+			<a href="{{ url_for('logout') }}">Выход</a>
+			<img src="/static/images/exit-24.png" class="img2">
+		{% else %}
+			<p>Войдите, чтобы участвовать в игре и просматривать игровую статистику.</p>
+			<a href="{{ url_for('login') }}">Уже есть логин. Войти.</a>
+			<img src="/static/images/login-24.png" class="img2"> 
+			<a href="{{ url_for('register') }}">Зарегистрироваться.</a>
+			<img src="/static/images/reg-24.png" class="img2">
+		{% endif %}
+	
+		
+	    {% block content %}{% endblock %}
+ 
+        </div>
+		<span></span>
+    </header>
+
+<section class="hero">
+        <div class="slider">
+            <div class="slide active" style="background-image: url('/static/images/348888_O.jpg');"></div>
+            <div class="slide" style="background-image: url('/static/images/map_night.png');"></div>
+            <div class="slide" style="background-image: url('/static/images/map_with_cracks.png');"></div>
+        </div>
+        <div class="overlay"></div>
+        <div class="content">
+            <h2>Мнимая карта</h2>
+            <p>— это современный образовательный сайт для школьников, который сочетает в себе увлекательную игру и учебный процесс. Сайт выполнен в минималистичном, но немного абстрактном дизайне, что создает уникальную атмосферу погружения в игру, не отвлекая при этом внимание от учебных задач.</p>
+         </div>
+    </section>
+
+</body>
+</html>

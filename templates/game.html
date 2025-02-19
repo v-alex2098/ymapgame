@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<html>
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Игра! Угадай регион России!</title>
+<link rel="stylesheet" href="/static/proekt.css" rel="stylesheet" type="text/css" />
+<script type = "text/javascript" src="/static/proekt.js" defer></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&apikey=3d1f90e4-82d6-4962-8527-a47beb863546" type="text/javascript"></script>
+<!--<script src="/static/util.calculateArea.min.js" type="text/javascript" defer></script>
+<script src="/static/polylabel.min.js" type="text/javascript" defer></script> -->
+
+<script type = "text/javascript"src="/static/main.js" defer></script>
+
+<script type = "text/javascript"src="/static/script_w_rules.js" defer></script>
+<script type = "text/javascript"src="/static/h_o_f.js"></script>
+
+</head>
+<body>
+<header class="header" id="header">
+        <h1 class="logo">Мнимая карта</h1>
+        <img src="/static/images/map_h.png" class="img1">
+        <div class="header_container">
+		<h1 class="logo">Игра! Угадай регион России!</h1>
+		<a href="#" id="showPopup">Правила игры</a>
+	    <a href="javascript:void(0)" onclick="showHallOfFame()">Лучшие игроки</a>
+       <a href="/">На главную страницу</a>	<img src="/static/images/home-24.png" class="img2">
+	   </div>
+	   <span></span>
+</header>
+<section class="mapsect">
+   <div class="gameinfo">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+		<br>
+      {% endif %}
+    {% endwith %}
+	<!--<div class="const1"> -->
+		<p class="region_quest" id="target-region">Выбери регион: Карта загружается...</p>
+		<p class="region_qnum" id="reg_num">Введите количество регионов для игры (мин. 5)</p>
+		<input type="hidden" id="maxRegions" value="85">
+		<input type="text" id="maxRegionsValue" value="85" size="2" maxlength="2"/>
+	<!--</div> -->
+	<!--<div class="const2">-->
+	
+	
+	<p class="region_qnum" id="nextlinks"><a href="javascript:void(0)" id="startGame" onclick="startGame()">Начать игру</a></p>
+	
+	</div> 
+	<!--</div>-->
+	<!-- <p>Осталось выбрать: <span id="regionsRemaining"></span></p> -->
+	
+	<div class="progress-bar__wrapper">
+    <label id="progress-bar-text" class="progress-bar__value" htmlFor="progress-bar"> 0% </label>
+    <progress id="progress-bar" value="0" max="85"></progress>
+    </div>
+    <div class="yandexmap" id="map"></div>
+</section>
+   <!-- <div id="stats">
+        <h2>Статистика (есть ещё в личном кабинете)</h2>
+        <ul id="stats-list"></ul>
+    </div> -->
+
+
+	<div id="popup" class="popup">
+		<div class="popup-header" id="popupHeader">
+			<h3>Правила игры</h3>
+		</div
+		<div class="popup-content">
+			<p>1. Правило номер один: Если регион угадан с первой попытки, то он окрашивается в тёмно-зелёный цвет. В дальнейшей выборке он не участвует. <br> Игроку начисляется 10 игровых очков.</p>
+			<p>2. Номер два: Если загаданный регон не угадан с первой попытки, то загаданный регион и ошибочно выбраннный пользователем регион окрашиваются в розовый цвет. Будет ещё одна попытка.</p>
+			<p>3. Правило три: Если повторная ошибка произошла c уже розовым регионом, то он окрашивается в красный цвет. Он считается потерянным, в игре не участвует и игровые очки не начисляются.</p>
+			<p>4. Правило четыре: Если ранее ошибочный розовый регион выбран верно, то он окрашивается в салатовый цвет. В дальнейшей выборке он не участвует. <br> Игроку начисляется 5 игровых очков.</p>
+			<p>5. Правило пять: У регионов, правильно выбранных и закрашенных в зелёные цвета, появляетстся возможность просмотра самых иннтересных достопримечательностей!</p>
+			<div class="popup-footer">
+				<div class='btn'>
+				<button align='center' class="button_rule" id="confirmBtn">Всё понятно!</button>
+				</div>
+			</div>
+        </div>
+    </div>
+ 
+</body>
+<style>
+	.popup-footer{
+		padding: 0 50px 0 32px;
+		display:flex;
+		flex-direction:row;
+		justify-content:space-between;
+		width:80%;
+		height:50px;
+		margin-top:15px;
+	}
+ </style> 
+</html>
+
+

@@ -1,0 +1,94 @@
+<html>
+<head>
+    <title>Администрирование результатов</title>
+</head>
+<body>
+<a href="/">На главную страницу</a>
+    <h2>Администрирование результатов</h2>
+	<p>{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}</p>
+    <table border="1" width="100%">
+        <tr>
+            <td width="15%">Пользователь</td>
+            <td colspan="8" width="85%">Список игровых сессий</td>
+         </tr>
+        {% for user, sessions in stats.items() %}
+        <tr>
+            <td rowspan ="{{ sessions|length + 2}}">
+			{{ user }} ({{ GetUserNameByLogin(user) }})
+			<p>
+			<button onclick="deleteUserStatistics('{{ user }}')">Удалить все игровые сессии</button>
+            <br>
+			<button onclick="deleteUser('{{ user }}')">Удалить учётную запись пользователя</button>
+			</td>
+			{% if sessions %}
+			<tr>
+			<td>Время начала</td>
+            <td>Время завершения</td>
+			<td>Времени затрачено</td>
+			<td>Регионов всего</td>
+			<td>Угадано с первой попытки</td>
+			<td>Угадано со второй попытки</td>
+			<td>Не угадано совсем</td>
+			<td>Итоговый счёт</td>
+			</tr>
+			{% else %}
+			<tr>
+			<td colspan = "8">
+			  Тут ничего нет.
+			</td>
+			</tr>
+			{% endif %}
+			
+			{% for session in sessions %}
+					<tr>
+					<td>{{ session.start_time_ftd }}</td>
+					<td>{{ session.end_time_ftd }}</td>
+					<td>{{ session.delta_time_ftd }}</td>
+					<td>{{ session.total_regions }}</td>
+					<td>{{ session.first_try_regions }}</td>
+					<td>{{ session.second_try_regions }}</td>
+					<td>{{ session.failed_regions }}</td>
+					<td>{{ session.score }}</td>
+					</tr>
+			{% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+<script>
+
+/*function logoffUser(userName) {
+    fetch('/admin/logoff_user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_login: userName })
+    }).then(response => response.json()).then(data => alert(data.message));
+}*/
+
+function deleteUserStatistics(userName) {
+    fetch('/admin/delete_user_statistics', {
+        method: 'POST',
+        headers : { 'Content-Type': 'application/json', },
+		body: JSON.stringify({ user_name: userName })
+    }).then(response => response.json()).then(data => alert(data.message));
+}
+
+function deleteUser(userName) {
+    fetch('/admin/delete_user', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_name: userName })
+    }).then(response => response.json()).then(data => alert(data.message));
+}
+
+</script>
+</html>

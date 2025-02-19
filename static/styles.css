@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+form input, form button {
+    margin: 10px;
+}
+h1, p {
+    text-align: center;
+}
+
+#map {
+    margin: 20px auto;
+}
+
+#stats {
+    text-align: center;
+    margin: 20px;
+}
+
+.flashes {
+    color: red;
+    list-style-type: none;
+    padding: 0;
+}
+

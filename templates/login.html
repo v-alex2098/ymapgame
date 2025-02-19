@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход в игру "Угадай регион России"</title>
+    <link rel="stylesheet" href="/static/proekt.css" rel="stylesheet" type="text/css" />
+    <script type = "text/javascript" src="/static/proekt.js" defer></script>
+</head>
+
+<body>
+ <header class="header" id="header">
+        <h1 class="logo">Мнимая карта</h1>
+        <img src="/static/images/map_h.png" class="img1">
+        <div class="header_container">
+		
+    
+       <a href="/">На главную страницу</a>
+			<img src="/static/images/home-24.png" class="img2">
+	    </div>
+	   <span></span>
+    </header>	
+	
+	<hr>
+	
+	<p>
+	
+	<section class="hero">
+	<!-- <div class="wrapper" id="wrapper">
+	
+	<div class="form-wrapper sign-in"> -->
+	<div class="wrapper-content" id="wrapper-content">
+    <h2>Вход в игру</h2>
+    <form method="post">
+		<center>
+		{% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+		<p>
+		<div class="input-group">
+        <input type="text" name="login" placeholder="Логин" required>
+		</div>
+		
+		<div class="input-group">
+        <input type="password" name="password" placeholder="Пароль" required>
+		</div>
+		</center>
+	    <p>
+		<button type="submit">Войти</button>
+		
+		
+		<div class="signUp-link">
+        <p>Нет аккаунта? <img src="/static/images/reg-24.png" class="img2"> <a href="{{ url_for('register') }}" class="signUpBtn-link">Зарегестрироваться</a></p>
+        </div>
+    </form>
+	
+	
+	</div>
+	</section>
+	
+	
+</body>
+</html>
